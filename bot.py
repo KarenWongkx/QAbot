@@ -32,7 +32,6 @@ loaded_faq_list = load_faq()
 masterBot = Bani(FAQs=loaded_faq_list, modelPath=MODEL_PATH)
 print(f"MasterBot created")
 
-
 app = Flask(__name__)
 
 @app.route("/")

@@ -1,6 +1,6 @@
 FROM python:3.7-slim
 
-WORKDIR /automation_training
+WORKDIR /bani_training
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1-mesa-glx \
@@ -24,13 +24,12 @@ RUN yes | pip install \
 RUN python -m spacy download en_core_web_md
 RUN python -m spacy download en_core_web_sm
 
-RUN python -m pip install -U watchdog[watchmedo]
+RUN python -m pip install -U "watchdog[watchmedo]"
 
 COPY faqStore ./faqStore/
 COPY generatedModel ./generatedModel/
 COPY bot.py bot.ini ./
 
+#CMD ["uwsgi", "bot.ini"]
 #CMD watchmedo auto-restart -d ./generatedModel/model_info.txt python3 ./bot.py
 CMD watchmedo auto-restart -d ./generatedModel/model_info.txt -- uwsgi --ini ./bot.ini
-
-#CMD ["uwsgi", "bot.ini"]
