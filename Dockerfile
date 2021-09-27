@@ -24,12 +24,7 @@ RUN yes | pip install \
 RUN python -m spacy download en_core_web_md
 RUN python -m spacy download en_core_web_sm
 
-RUN python -m pip install -U "watchdog[watchmedo]"
-
-COPY faqStore ./faqStore/
-COPY generatedModel ./generatedModel/
 COPY bot.py bot.ini ./
 
-#CMD ["uwsgi", "bot.ini"]
-#CMD watchmedo auto-restart -d ./generatedModel/model_info.txt python3 ./bot.py
-CMD watchmedo auto-restart -d ./generatedModel/model_info.txt -- uwsgi --ini ./bot.ini
+CMD ["uwsgi","bot.ini"]
+

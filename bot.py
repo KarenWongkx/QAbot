@@ -7,8 +7,8 @@ from Bani.core.FAQ import FAQ
 
 logging.basicConfig(level=logging.ERROR)
 
-FAQSTORE_PATH = "./faqStore"
-MODEL_PATH = "./generatedModel"
+FAQSTORE_PATH = "/faq_store"
+MODEL_PATH = "/model"
 
 def load_faq():
     faq_list = []
@@ -16,18 +16,13 @@ def load_faq():
     for file_name in os.listdir(FAQSTORE_PATH):
         if file_name.endswith(".pkl"):
             faq_name = file_name.partition('.')[0]
+            print(f"FAQ name: {faq_name}")
             faq_name = FAQ(name=faq_name)
             faq_name.load(FAQSTORE_PATH)
             faq_list.append(faq_name)
             print(f"FAQ created from {file_name}")
     return faq_list
 
-def check_bot_answering():
-    print("Test bot, answering ...")
-    out = masterBot.findClosest("My parents usually come over to help me with caring for my children on weekdays. Can they do so?", K = 5)
-    print(out[0].answer)
-    
-# Create masterbot 
 loaded_faq_list = load_faq()
 masterBot = Bani(FAQs=loaded_faq_list, modelPath=MODEL_PATH)
 print(f"MasterBot created")
