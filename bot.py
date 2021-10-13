@@ -76,5 +76,5 @@ def getAnswer():
 
 if __name__ == "__main__":
     #app.run(host="0.0.0.0", port=os.getenv("PORT", 1995), threaded=True) 
-    app.run(host="0.0.0.0", port=8081, threaded=True) 
+    app.run(host="0.0.0.0", port=8057, threaded=True) 
     
